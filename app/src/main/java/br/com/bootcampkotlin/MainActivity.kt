@@ -1,5 +1,6 @@
 package br.com.bootcampkotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,12 +13,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.bootcampkotlin.ContactDetail.Companion.EXTRA_CONTACT
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ClickItemContactListener {
     private val rvList: RecyclerView by lazy {
         findViewById<RecyclerView>(R.id.rv_list)
     }
-    private val adapter = ContactAdapter()
+    private val adapter = ContactAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun clickItemContact(contact: Contact) {
+        val intent = Intent(this, ContactDetail::class.java)
+        intent.putExtra(EXTRA_CONTACT, contact)
+        startActivity(intent)
+    }
+
     private fun initDrawer() {
         val drawerLayout = findViewById<View>(R.id.drawer_layout) as DrawerLayout
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -73,8 +81,13 @@ class MainActivity : AppCompatActivity() {
                     "img.png"
                 ),
                 Contact(
-                    "Edson Shideki Kokado",
-                    "(99) 99999-9999",
+                    "Jose Fulano",
+                    "(88) 98888-9888",
+                    "img.png"
+                ),
+                Contact(
+                    "Antonio Da Silva",
+                    "(77) 77777-7777",
                     "img.png"
                 )
             )
@@ -84,4 +97,5 @@ class MainActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
 }
