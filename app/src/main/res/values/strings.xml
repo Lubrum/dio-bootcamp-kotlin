@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bootcamp Kotlin</string>
+    <string name="iv_photograph_content_description">Photograph</string>
 </resources>
