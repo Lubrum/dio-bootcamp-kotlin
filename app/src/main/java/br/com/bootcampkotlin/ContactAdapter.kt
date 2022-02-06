@@ -41,7 +41,7 @@ class ContactAdapter(var listener: ClickItemContactListener) :
 
         init {
             itemView.setOnClickListener {
-                listener.clickItemContact(list[adapterPosition])
+                listener.clickItemContact(list[absoluteAdapterPosition])
             }
         }
 
